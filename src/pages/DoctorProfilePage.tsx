@@ -159,7 +159,12 @@ export function DoctorProfilePage() {
             >
               <CalendarTick size="18" variant="Bulk" /> Zakaži termin
             </Link>
-            <Button variant="secondary" size="lg" block leftIcon={<Message size="16" />}>
+            <Button
+              variant="secondary"
+              size="lg"
+              className="flex-1"
+              leftIcon={<Message size="16" />}
+            >
               Pošalji poruku
             </Button>
           </div>

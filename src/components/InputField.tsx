@@ -1,5 +1,4 @@
-import { forwardRef } from "react";
-import type { InputHTMLAttributes, ReactNode } from "react";
+import type { InputHTMLAttributes, ReactNode, Ref } from "react";
 import { classNames } from "../utils/format";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
@@ -8,12 +7,20 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   error?: string;
   leftIcon?: ReactNode;
   rightSlot?: ReactNode;
+  ref?: Ref<HTMLInputElement>;
 }
 
-export const InputField = forwardRef<HTMLInputElement, Props>(function InputField(
-  { label, hint, error, leftIcon, rightSlot, className, id, ...rest },
+export function InputField({
+  label,
+  hint,
+  error,
+  leftIcon,
+  rightSlot,
+  className,
+  id,
   ref,
-) {
+  ...rest
+}: Props) {
   const inputId = id ?? `field-${Math.random().toString(36).slice(2, 9)}`;
 
   return (
@@ -51,4 +58,4 @@ export const InputField = forwardRef<HTMLInputElement, Props>(function InputFiel
       ) : null}
     </div>
   );
-});
+}
