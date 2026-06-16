@@ -30,32 +30,6 @@ export class LocalStore<T> implements IStorable<T> {
   }
 }
 
-export class SessionStore<T> implements IStorable<T> {
-  private readonly key: string;
-
-  constructor(key: string) {
-    this.key = key;
-  }
-
-  save(value: T): void {
-    sessionStorage.setItem(this.key, JSON.stringify(value));
-  }
-
-  load(): T | null {
-    try {
-      const raw = sessionStorage.getItem(this.key);
-      if (!raw) return null;
-      return JSON.parse(raw) as T;
-    } catch {
-      return null;
-    }
-  }
-
-  clear(): void {
-    sessionStorage.removeItem(this.key);
-  }
-}
-
 export const StorageKeys = {
   auth: "medkarton:auth",
   patient: "medkarton:patient",
