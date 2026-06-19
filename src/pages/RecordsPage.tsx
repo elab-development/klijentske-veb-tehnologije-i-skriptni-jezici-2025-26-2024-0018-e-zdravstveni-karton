@@ -18,7 +18,8 @@ import { EmptyState } from "../components/EmptyState";
 import { RECORDS_SEED, RECORD_TYPES } from "../data/records";
 import { LocalStore, StorageKeys } from "../utils/storage";
 import { formatDateDot } from "../utils/date";
-import type { MedicalRecord, RecordStatus } from "../types";
+import { recordStatusTone } from "../utils/status";
+import type { MedicalRecord } from "../types";
 
 const PAGE_SIZE = 6;
 const recentStore = new LocalStore<string[]>(StorageKeys.recentSearches);
@@ -201,7 +202,7 @@ function RecordItem({ record }: { record: MedicalRecord }) {
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <h3 className="truncate text-sm font-bold text-ink">{record.title}</h3>
-            <StatusChip tone={statusTone(record.status)}>{record.status}</StatusChip>
+            <StatusChip tone={recordStatusTone(record.status)}>{record.status}</StatusChip>
           </div>
           <p className="text-xs text-ink-soft">
             {record.doctorName} · {formatDateDot(record.date)}
@@ -221,11 +222,4 @@ function RecordItem({ record }: { record: MedicalRecord }) {
       </div>
     </Card>
   );
-}
-
-function statusTone(status: RecordStatus): "success" | "warning" | "danger" | "neutral" {
-  if (status === "Normalan" || status === "Uredan") return "success";
-  if (status === "Proveriti") return "warning";
-  if (status === "Abnormalan") return "danger";
-  return "neutral";
 }

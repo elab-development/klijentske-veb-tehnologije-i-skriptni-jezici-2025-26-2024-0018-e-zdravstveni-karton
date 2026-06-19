@@ -19,6 +19,7 @@ import { greetingByHour, formatLongDate, formatShortDate } from "../utils/date";
 import { RECORDS_SEED } from "../data/records";
 import { DOCTORS_SEED } from "../data/doctors";
 import { initialsFromName } from "../utils/format";
+import { recordStatusTone } from "../utils/status";
 import { EmptyState } from "../components/EmptyState";
 
 export function HomePage() {
@@ -172,7 +173,7 @@ export function HomePage() {
                         <p className="truncate text-sm font-semibold text-ink">{rec.title}</p>
                         <p className="text-xs text-ink-soft">{rec.doctorName}</p>
                       </div>
-                      <StatusChip tone={statusTone(rec.status)}>{rec.status}</StatusChip>
+                      <StatusChip tone={recordStatusTone(rec.status)}>{rec.status}</StatusChip>
                     </div>
                   </Card>
                 </li>
@@ -217,11 +218,4 @@ function toneBg(tone: "primary" | "success" | "warning") {
   if (tone === "success") return "bg-success-50 text-success-700";
   if (tone === "warning") return "bg-warning-50 text-warning-700";
   return "bg-primary-50 text-primary-700";
-}
-
-function statusTone(status: string): "success" | "warning" | "danger" | "neutral" {
-  if (status === "Normalan" || status === "Uredan") return "success";
-  if (status === "Proveriti") return "warning";
-  if (status === "Abnormalan") return "danger";
-  return "neutral";
 }
